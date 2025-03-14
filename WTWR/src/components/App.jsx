@@ -1,12 +1,16 @@
-import '../blocks/App.css'
-import Header from './Header/Header';
+import "../blocks/App.css";
+import Header from "./Header/Header";
+import Main from "./Main/Main";
 
 function App() {
-  return <div className='app'>
-    <div className='app__content'>
-      <Header>Header</Header>
+  return (
+    <div className="app">
+      <div className="app__content">
+        <Header />
+        <Main />
+      </div>
     </div>
-  </div>
+  );
 }
 
-export default App
+export default App;
