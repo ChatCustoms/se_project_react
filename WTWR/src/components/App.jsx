@@ -1,7 +1,12 @@
 import '../blocks/App.css'
+import Header from './Header/Header';
 
 function App() {
-  return <div></div>
+  return <div className='app'>
+    <div className='app__content'>
+      <Header>Header</Header>
+    </div>
+  </div>
 }
 
 export default App
