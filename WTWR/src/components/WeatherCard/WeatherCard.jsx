@@ -1,7 +1,7 @@
 import "./WeatherCard.css";
 import Sunny from "../../images/sunny.png";
 
-function WeaterCard() {
+function WeatherCard() {
   return (
     <section className="weather-card">
       <p className="weather-card__temp">75 &deg; F</p>
@@ -10,4 +10,4 @@ function WeaterCard() {
   );
 }
 
-export default WeaterCard;
+export default WeatherCard;
