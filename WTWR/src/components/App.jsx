@@ -5,6 +5,7 @@ import Header from "./Header/Header";
 import Main from "./Main/Main";
 import ModalWithForm from "./ModalWithForm/ModalWithForm";
 import ItemModal from "./ItemModal/ItemModal";
+import Footer from "./Footer/Footer";
 
 function App() {
   const [weatherData, setWeatherData] = useState({ type: "cold" });
@@ -93,6 +94,7 @@ const handleModalClose = () => {
         </fieldset>
       </ModalWithForm>
       <ItemModal activeModal={activeModal} card={selectedCard} onClose={handleModalClose}/>
+      <Footer />
     </div>
   );
 }
