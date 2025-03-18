@@ -91,7 +91,7 @@
 }
 
 .modal__submit {
-  background-color: #0000003d;
+  background-color: #000000;
   padding: 8px 16px 8px 16px;
   width: fit-content;
   border: none;
@@ -102,4 +102,15 @@
   line-height: 20px;
   letter-spacing: 0%;
   color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.modal__submit:hover {
+  background-color: #0000006d;
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.modal__submit:disabled {
+  background-color: #0000003d;
 }
