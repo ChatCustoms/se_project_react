@@ -1,10 +1,10 @@
 import "./WeatherCard.css";
-import Sunny from "../../images/sunny.png";
+import Sunny from "../../images/day/Clear.png";
 
-function WeatherCard() {
+function WeatherCard({ weatherData }) {
   return (
     <section className="weather-card">
-      <p className="weather-card__temp">75 &deg; F</p>
+      <p className="weather-card__temp">{weatherData.temp.F} &deg; F</p>
       <img src={Sunny} alt="Sunny skies" className="weather-card__image" />
     </section>
   );

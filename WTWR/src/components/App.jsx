@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "../blocks/App.css";
 import Header from "./Header/Header";
@@ -6,30 +6,46 @@ import Main from "./Main/Main";
 import ModalWithForm from "./ModalWithForm/ModalWithForm";
 import ItemModal from "./ItemModal/ItemModal";
 import Footer from "./Footer/Footer";
+import { filterWeatherData, getWeather } from "../utils/weatherApi";
+import { coordinates, APIkey } from "../utils/constants";
 
 function App() {
-  const [weatherData, setWeatherData] = useState({ type: "cold" });
+  const [weatherData, setWeatherData] = useState({
+    type: "",
+    temp: { F: 555 },
+  });
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
-  }
+  };
 
-const handleAddClick = () => {
-  setActiveModal("add-garment");
-};
+  const handleAddClick = () => {
+    setActiveModal("add-garment");
+  };
 
-const handleModalClose = () => {
-  setActiveModal("");
-}
+  const handleModalClose = () => {
+    setActiveModal("");
+  };
+
+  useEffect(() => {
+    getWeather(coordinates, APIkey)
+      .then((data) => {
+        const filterData = filterWeatherData(data);
+        setWeatherData(filterData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <div className="app">
       <div className="app__content">
-        <Header handleAddClick={handleAddClick}/>
-        <Main weatherData={weatherData} handleCardClick={handleCardClick}/>
+        <Header handleAddClick={handleAddClick} weatherData={weatherData} />
+        <Main weatherData={weatherData} handleCardClick={handleCardClick} />
       </div>
       <ModalWithForm
         titleText="Add garment"
@@ -93,7 +109,11 @@ const handleModalClose = () => {
           </label>
         </fieldset>
       </ModalWithForm>
-      <ItemModal activeModal={activeModal} card={selectedCard} onClose={handleModalClose}/>
+      <ItemModal
+        activeModal={activeModal}
+        card={selectedCard}
+        onClose={handleModalClose}
+      />
       <Footer />
     </div>
   );
