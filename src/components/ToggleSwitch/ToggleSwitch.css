@@ -4,7 +4,7 @@
   border: 2px solid #7e7e7e;
   border-radius: 20px;
   cursor: pointer;
-  overflow: hidden;
+  /* overflow: hidden; */
   margin-left: auto;
   margin-right: 20px;
   position: relative;
@@ -21,7 +21,7 @@
   border-radius: 50%;
   position: absolute;
   left: 0;
-  transition: all 0.3s ease;
+  transition: all 0.6s;
 }
 
 .toggle-switch__text {
@@ -33,7 +33,7 @@
   color: rgba(0, 0, 0, 0.5);
 }
 
-.toggle-switch__text-F {
+.toggle-switch__text_F {
   left: 9px;
 }
 
@@ -44,3 +44,11 @@
 .toggle-switch__checkbox:checked ~ .toggle-switch__slider {
   left: 28px;
 }
+
+.toggle-switch__checkbox:checked ~ .toggle-switch__text_C {
+    color: white;
+  }
+
+  .toggle-switch__checkbox:not(:checked) ~ .toggle-switch__text_F {
+    color: white;
+  }
