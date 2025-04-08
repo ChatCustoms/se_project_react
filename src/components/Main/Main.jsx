@@ -8,7 +8,6 @@ function Main({ weatherData, handleCardClick, clothingItems }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
   return (
-    
     <main>
       <WeatherCard weatherData={weatherData} />
       <section className="cards">

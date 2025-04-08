@@ -1,7 +1,6 @@
 import "./ModalWithForm.css";
 import CloseIcon from "../../images/closeIcon.svg";
 
-
 function ModalWithForm({
   children,
   titleText,

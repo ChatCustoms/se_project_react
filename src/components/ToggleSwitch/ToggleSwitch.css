@@ -46,9 +46,9 @@
 }
 
 .toggle-switch__checkbox:checked ~ .toggle-switch__text_C {
-    color: white;
-  }
+  color: white;
+}
 
-  .toggle-switch__checkbox:not(:checked) ~ .toggle-switch__text_F {
-    color: white;
-  }
+.toggle-switch__checkbox:not(:checked) ~ .toggle-switch__text_F {
+  color: white;
+}
