@@ -4,11 +4,18 @@
   padding: 32px 0 28px;
 }
 
+.header__container {
+  display: flex;
+
+}
+
 .header__logo {
   margin-right: 20px;
 }
 
 .header__date-and-location {
+  position: relative;
+  top: 11px;
   margin: 0;
   font-family: "cabinet Grotesk", sans-serif;
   font-weight: 700;
@@ -34,4 +41,9 @@
   font-family: "cabinet Grotesk", sans-serif;
   font-weight: 700;
   font-size: 20px;
+}
+
+.header__link {
+  text-decoration: none;
+  color: #000;
 }

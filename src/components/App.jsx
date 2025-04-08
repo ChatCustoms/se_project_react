@@ -13,6 +13,7 @@ import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitCon
 import AddItemModal from "./AddItemModal/AddItemModal";
 import { defaultClothingItems } from "../utils/constants";
 import Profile from "./Profile/Profile";
+import { getItems } from "../utils/api";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -48,6 +49,14 @@ function App() {
     setActiveModal("");
   };
 
+  const handleDelete = () => {
+    setClothingItems(
+      clothingItems.filter((item) => item._id !== selectedCard._id)
+    );
+    setActiveModal("");
+    setSelectedCard({});
+  };
+
   const handleAddItemModalSubmit = ({ name, imageURL, weatherType }) => {
     setClothingItems([
       ...clothingItems,
@@ -67,8 +76,16 @@ function App() {
       });
   }, []);
 
+  useEffect(() => {
+    getItems()
+      .then((data) => {
+        setClothingItems(data);
+      })
+      .catch(console.error);
+  }, []);
+
   return (
-    <BrowserRouter basename="/se_project_react">
+    <BrowserRouter basename="/se_project_react/">
       <CurrentTemperatureUnitContext.Provider
         value={{ currentTemperatureUnit, handleToggleSwitchChange }}
       >
@@ -106,6 +123,7 @@ function App() {
             activeModal={activeModal}
             card={selectedCard}
             onClose={handleModalClose}
+            onDelete={handleDelete}
           />
           <Footer />
         </div>

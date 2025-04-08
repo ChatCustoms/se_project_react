@@ -22,16 +22,29 @@
 }
 
 .modal__caption {
-  margin: 0 0 12px 0;
+  margin: 0 0 12px 12px;
   font-size: 20px;
     font-weight: 700;
     font-family: "cabinet Grotesk", sans-serif;
+    left: 32px;
+    bottom: 68px;
 }
 
 .modal__weather {
-  margin: 0 0 20px 0;
+  margin: 0 0 12px 12px;
   font-size: 20px;
   font-family: "cabinet Grotesk", sans-serif;
 font-weight: 700;
+}
 
+.modal__delete{
+  position: absolute;
+  right: 32px;
+  top: 518px;
+  color: #FF4D00;
+  font-size: 20px;
+  font-family: "cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  border: none;
+  background-color: transparent;
 }
