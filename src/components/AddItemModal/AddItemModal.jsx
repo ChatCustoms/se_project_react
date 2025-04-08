@@ -8,15 +8,15 @@ export default function AddItemModal({
   onAddItemModalSubmit,
 }) {
   const [name, setName] = useState("");
-  const [imageURL, setImageURL] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [weatherType, setWeatherType] = useState("");
 
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
 
-  const handleImageURLChange = (e) => {
-    setImageURL(e.target.value);
+  const handleImageUrlChange = (e) => {
+    setImageUrl(e.target.value);
   };
 
   const handleWeatherTypeChange = (e) => {
@@ -27,11 +27,11 @@ export default function AddItemModal({
     e.preventDefault();
     onAddItemModalSubmit({
       name,
-      imageURL,
+      imageUrl,
       weatherType,
     });
     setName("");
-    setImageURL("");
+    setImageUrl("");
     setWeatherType("");
   };
 
@@ -55,15 +55,15 @@ export default function AddItemModal({
           required
         />
       </label>
-      <label className="modal__label" htmlFor="imageURL">
+      <label className="modal__label" htmlFor="imageUrl">
         Image{" "}
         <input
-          id="imageURL"
+          id="imageUrl"
           className="modal__input"
           type="text"
           placeholder="Image URL"
-          onChange={handleImageURLChange}
-          value={imageURL}
+          onChange={handleImageUrlChange}
+          value={imageUrl}
           required
         />
       </label>

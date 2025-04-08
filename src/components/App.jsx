@@ -11,9 +11,8 @@ import { filterWeatherData, getWeather } from "../utils/weatherApi";
 import { coordinates, APIkey } from "../utils/constants";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "./AddItemModal/AddItemModal";
-import { defaultClothingItems } from "../utils/constants";
 import Profile from "./Profile/Profile";
-import { getItems } from "../utils/api";
+import { addItem, deleteItem, getItems } from "../utils/api";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -26,7 +25,7 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
-  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+  const [clothingItems, setClothingItems] = useState([]);
 
   const handleToggleSwitchChange = () => {
     if (currentTemperatureUnit === "F") {
@@ -50,19 +49,26 @@ function App() {
   };
 
   const handleDelete = () => {
-    setClothingItems(
-      clothingItems.filter((item) => item._id !== selectedCard._id)
-    );
-    setActiveModal("");
-    setSelectedCard({});
+    deleteItem(selectedCard._id).then(() => {
+      setClothingItems(
+        clothingItems.filter((item) => item._id !== selectedCard._id)
+      );
+      setActiveModal("");
+      setSelectedCard({});
+    });
   };
 
-  const handleAddItemModalSubmit = ({ name, imageURL, weatherType }) => {
-    setClothingItems([
-      ...clothingItems,
-      { name, link: imageURL, weather: weatherType },
-    ]);
-    handleModalClose();
+  const handleAddItemModalSubmit = ({ name, imageUrl, weatherType }) => {
+    addItem({
+      name,
+      imageUrl: imageUrl,
+      weather: weatherType,
+    })
+      .then((newItem) => {
+        setClothingItems([...clothingItems, newItem]);
+        handleModalClose();
+      })
+      .catch(console.error);
   };
 
   useEffect(() => {
@@ -109,6 +115,7 @@ function App() {
                   <Profile
                     clothingItems={clothingItems}
                     handleCardClick={handleCardClick}
+                    handleAddClick={handleAddClick}
                   />
                 }
               />
