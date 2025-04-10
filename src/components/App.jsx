@@ -53,9 +53,10 @@ function App() {
       setClothingItems(
         clothingItems.filter((item) => item._id !== selectedCard._id)
       );
-      setActiveModal("");
+      setActiveModal("handleModalClose");
       setSelectedCard({});
-    });
+    })
+    .catch(console.error);
   };
 
   const handleAddItemModalSubmit = ({ name, imageUrl, weatherType }) => {
@@ -65,7 +66,7 @@ function App() {
       weather: weatherType,
     })
       .then((newItem) => {
-        setClothingItems([...clothingItems, newItem]);
+        setClothingItems([newItem, ...clothingItems]);
         handleModalClose();
       })
       .catch(console.error);

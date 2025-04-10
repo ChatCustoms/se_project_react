@@ -101,6 +101,42 @@
       "imageUrl": "https://i.ebayimg.com/images/g/Jm8AAOSw44dhfKKc/s-l1200.jpg",
       "weather": "cold",
       "_id": 17
+    },
+    {
+      "name": "Womans coat",
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbEY3HzhAIfeY70NE-e4vTImkTQ3y79wYRmQ&s",
+      "weather": "cold",
+      "_id": 18
+    },
+    {
+      "name": "ssss",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sweatshirt.png?etag=008a9674757bea2e0bdb31242e364be0",
+      "weather": "warm",
+      "_id": 19
+    },
+    {
+      "name": "ddddddd",
+      "imageUrl": "https://coach.scene7.com/is/image/Coach/cv463_kha_a0?$mobileProductV3$",
+      "weather": "warm",
+      "_id": 20
+    },
+    {
+      "name": "aaaaaa",
+      "imageUrl": "https://coach.scene7.com/is/image/Coach/cv463_kha_a0?$mobileProductV3$",
+      "weather": "warm",
+      "_id": 21
+    },
+    {
+      "name": "dddddddddddd",
+      "imageUrl": "https://coach.scene7.com/is/image/Coach/cv463_kha_a0?$mobileProductV3$",
+      "weather": "warm",
+      "_id": 22
+    },
+    {
+      "name": "cccccccc",
+      "imageUrl": "https://coach.scene7.com/is/image/Coach/cv463_kha_a0?$mobileProductV3$",
+      "weather": "warm",
+      "_id": 23
     }
   ]
 }
