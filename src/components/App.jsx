@@ -49,14 +49,15 @@ function App() {
   };
 
   const handleDelete = () => {
-    deleteItem(selectedCard._id).then(() => {
-      setClothingItems(
-        clothingItems.filter((item) => item._id !== selectedCard._id)
-      );
-      setActiveModal("handleModalClose");
-      setSelectedCard({});
-    })
-    .catch(console.error);
+    deleteItem(selectedCard._id)
+      .then(() => {
+        setClothingItems(
+          clothingItems.filter((item) => item._id !== selectedCard._id)
+        );
+        handleModalClose();
+        setSelectedCard({});
+      })
+      .catch(console.error);
   };
 
   const handleAddItemModalSubmit = ({ name, imageUrl, weatherType }) => {
