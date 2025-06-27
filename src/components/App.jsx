@@ -13,6 +13,10 @@ import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitCon
 import AddItemModal from "./AddItemModal/AddItemModal";
 import Profile from "./Profile/Profile";
 import { addItem, deleteItem, getItems } from "../utils/api";
+import ProtectedRoute from "./ProtectedRoute";
+
+const [currerntUser, setCurrentUser] = useState(null);
+const [loggedIn, setLoggedIn] = useState(false);
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -73,6 +77,42 @@ function App() {
       .catch(console.error);
   };
 
+  const handleRegister = (FormData) => {
+    auth
+      .register(FormData)
+      .then(() =>
+        handleLogin({ email: FormData.email, password: FormData.password })
+      )
+      .catch(console.error);
+  };
+
+  const handleLogin = ({ email, password }) => {
+    auth
+      .login({ email, password })
+      .then((res) => {
+        localStorage.setItem("jwt", res.token);
+        setLoggedIn(true);
+        checkToken(res.token);
+        setActiveModal("");
+      })
+      .catch(console.error);
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      auth
+        .checkToken(token)
+        .then((user) => {
+          setCurrentUser(user);
+          setLoggedIn(true);
+        })
+        .catch((err) => {
+          console.error;
+        });
+    }
+  }, []);
+
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -114,7 +154,9 @@ function App() {
               <Route
                 path="/profile"
                 element={
-                  <Profile
+                  <ProtectedRoute
+                    element={Profile}
+                    loggedIn={loggedIn}
                     clothingItems={clothingItems}
                     handleCardClick={handleCardClick}
                     handleAddClick={handleAddClick}
