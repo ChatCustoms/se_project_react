@@ -98,6 +98,21 @@ function App() {
       .catch(console.error);
   };
 
+  const handleCardLike = ({ _id, likes }) => {
+    const token = localStorage.getItem("jwt");
+    const isLiked = likes.includes(currentUser._id);
+
+    const request = isLiked ? api.removeCardLike : api.addCardLike;
+
+    request(_id, token)
+      .then((updatedCard) => {
+        setClothingItems((cards) =>
+          cards.map((item) => (item._id === _id ? updatedCard : item))
+        );
+      })
+      .catch(console.error);
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("jwt");
     if (token) {

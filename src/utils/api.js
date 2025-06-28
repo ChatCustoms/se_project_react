@@ -30,4 +30,17 @@ function checkResponse(response) {
   return response.json();
 }
 
-export { getItems, deleteItem, addItem, checkResponse };
+const updateProfile = (data, token) => {
+  return fetch(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  }).then((res) =>
+    res.ok ? res.json() : Promise.reject("Profile update failed")
+  );
+};
+
+export { getItems, deleteItem, addItem, checkResponse, updateProfile };
