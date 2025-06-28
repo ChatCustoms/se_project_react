@@ -113,6 +113,13 @@ function App() {
       .catch(console.error);
   };
 
+  const handleSignOut = () => {
+    localStorage.removeItem("jwt");
+    setCurrentUser(null);
+    setLoggedIn(false);
+    setActiveModal("");
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("jwt");
     if (token) {
@@ -174,7 +181,7 @@ function App() {
                   path="/profile"
                   element={
                     <ProtectedRoute
-                      element={Profile}
+                      element={() => <Profile onSignOut={handleSignOut} />}
                       loggedIn={loggedIn}
                       clothingItems={clothingItems}
                       handleCardClick={handleCardClick}
