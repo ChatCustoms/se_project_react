@@ -1,13 +1,13 @@
 import "./LoginModal.css";
 import { useState } from "react";
 
-const LoginModal = ({ isOpen, onClose, onRegister }) => {
+const LoginModal = ({ isOpen, onClose, onLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onRegister({ name, avatar, email, password });
+    onLogin({ email, password });
   };
 
   return isOpen ? (
