@@ -91,17 +91,20 @@ function App() {
       .then((res) => {
         localStorage.setItem("jwt", res.token);
         setLoggedIn(true);
-        auth.checkToken();
+        auth.checkToken(res.token).then((user) => {
+          setCurrentUser(user);
+          setLoggedIn(true);
+          handleModalClose();
+        });
       })
       .catch(console.error);
   };
 
-  const handleRegister = (data) => {
+  const handleRegister = ({ name, avatar, email, password }) => {
     const loginData = {
-    email: data.email,
-    password: data.password,
-  };
-    console.log("handleRegister recieved:", { email, password, name, avatar });
+      email,
+      password,
+    };
     auth
       .register(data)
       .then(() => handleLogin(loginData))
