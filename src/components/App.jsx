@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { act, useEffect, useState } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 import "../blocks/App.css";
@@ -15,6 +15,10 @@ import Profile from "./Profile/Profile";
 import { addItem, deleteItem, getItems } from "../utils/api";
 import ProtectedRoute from "./ProtectedRoute";
 import CurrentUserContext from "../contexts/CurrentUserContext";
+import auth from "../utils/auth";
+import * as api from "../utils/api";
+import LoginModal from "./LoginModal/LoginModal";
+import RegisterModal from "./RegisterModal/RegisterModal";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -65,11 +69,15 @@ function App() {
   };
 
   const handleAddItemModalSubmit = ({ name, imageUrl, weatherType }) => {
-    addItem({
-      name,
-      imageUrl: imageUrl,
-      weather: weatherType,
-    })
+    const token = localStorage.getItem("jwt");
+    addItem(
+      {
+        name,
+        imageUrl: imageUrl,
+        weather: weatherType,
+      },
+      token
+    )
       .then((newItem) => {
         setClothingItems([newItem, ...clothingItems]);
         handleModalClose();
@@ -77,25 +85,67 @@ function App() {
       .catch(console.error);
   };
 
-  const handleRegister = (FormData) => {
+  const handleLogin = (email, password) => {
     auth
-      .register(FormData)
-      .then(() =>
-        handleLogin({ email: FormData.email, password: FormData.password })
-      )
-      .catch(console.error);
-  };
-
-  const handleLogin = ({ email, password }) => {
-    auth
-      .login({ email, password })
+      .login(email, password)
       .then((res) => {
         localStorage.setItem("jwt", res.token);
         setLoggedIn(true);
-        checkToken(res.token);
-        setActiveModal("");
+        auth.checkToken();
       })
       .catch(console.error);
+  };
+
+  const handleRegister = (data) => {
+    const loginData = {
+    email: data.email,
+    password: data.password,
+  };
+    console.log("handleRegister recieved:", { email, password, name, avatar });
+    auth
+      .register(data)
+      .then(() => handleLogin(loginData))
+      .catch(console.error);
+  };
+
+  const checkLoggedIn = () => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      auth
+        .checkToken(token)
+        .then((user) => {
+          setCurrentUser(user);
+          setLoggedIn(true);
+        })
+        .catch((err) => {
+          console.error(err);
+          setLoggedIn(false);
+          localStorage.removeItem("jwt");
+        });
+    } else {
+      setLoggedIn(false);
+      setCurrentUser(null);
+    }
+  };
+
+  const checkRegistered = () => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      auth
+        .checkToken(token)
+        .then((user) => {
+          setCurrentUser(user);
+          setLoggedIn(true);
+        })
+        .catch((err) => {
+          console.error(err);
+          setLoggedIn(false);
+          localStorage.removeItem("jwt");
+        });
+    } else {
+      setLoggedIn(false);
+      setCurrentUser(null);
+    }
   };
 
   const handleCardLike = ({ _id, likes }) => {
@@ -118,6 +168,14 @@ function App() {
     setCurrentUser(null);
     setLoggedIn(false);
     setActiveModal("");
+  };
+
+  const openLoginModal = () => {
+    setActiveModal("login");
+  };
+
+  const openRegisterModal = () => {
+    setActiveModal("register");
   };
 
   useEffect(() => {
@@ -153,10 +211,11 @@ function App() {
       })
       .catch(console.error);
   }, []);
+  console.log("App - LoggedIn value:", loggedIn);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <BrowserRouter basename="/se_project_react/">
+      <BrowserRouter>
         <CurrentTemperatureUnitContext.Provider
           value={{ currentTemperatureUnit, handleToggleSwitchChange }}
         >
@@ -165,6 +224,8 @@ function App() {
               <Header
                 handleAddClick={handleAddClick}
                 weatherData={weatherData}
+                onLogin={openLoginModal}
+                onRegister={openRegisterModal}
               />
               <Routes>
                 <Route
@@ -181,11 +242,16 @@ function App() {
                   path="/profile"
                   element={
                     <ProtectedRoute
-                      element={() => <Profile onSignOut={handleSignOut} />}
                       loggedIn={loggedIn}
-                      clothingItems={clothingItems}
-                      handleCardClick={handleCardClick}
-                      handleAddClick={handleAddClick}
+                      element={
+                        <Profile
+                          onSignOut={handleSignOut}
+                          loggedIn={loggedIn}
+                          clothingItems={clothingItems}
+                          handleCardClick={handleCardClick}
+                          handleAddClick={handleAddClick}
+                        />
+                      }
                     />
                   }
                 />
@@ -203,6 +269,18 @@ function App() {
               onDelete={handleDelete}
             />
             <Footer />
+            <LoginModal
+              isOpen={activeModal === "login"}
+              onOpen={openLoginModal}
+              onClose={handleModalClose}
+              onLogin={handleLogin}
+            />
+            <RegisterModal
+              isOpen={activeModal === "register"}
+              onOpen={openRegisterModal}
+              onClose={handleModalClose}
+              onRegister={handleRegister}
+            />
           </div>
         </CurrentTemperatureUnitContext.Provider>
       </BrowserRouter>

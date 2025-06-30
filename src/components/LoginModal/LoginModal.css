@@ -1,0 +1,32 @@
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+}
+
+.modal__form input {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.modal__form button[type="submit"] {
+  background-color: #347eff;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.modal__form button[type="button"] {
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  margin-top: 5px;
+}

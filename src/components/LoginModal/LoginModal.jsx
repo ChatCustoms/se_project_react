@@ -1,5 +1,6 @@
 import "./LoginModal.css";
 import { useState } from "react";
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 const LoginModal = ({ isOpen, onClose, onLogin }) => {
   const [email, setEmail] = useState("");
@@ -10,26 +11,40 @@ const LoginModal = ({ isOpen, onClose, onLogin }) => {
     onLogin({ email, password });
   };
 
-  return isOpen ? (
-    <div className="modal">
-      <form onSubmit={handleSubmit}>
+  return (
+    <ModalWithForm
+      titleText="Log In"
+      buttonText="Log In"
+      isOpen={isOpen}
+      onClose={onClose}
+      onSubmit={handleSubmit}
+    >
+      <label className="modal__label" htmlFor="email">
+        Email{" "}
         <input
+          id="email"
+          className="modal__input"
           type="email"
           placeholder="Email"
-          value={email}
           onChange={(e) => setEmail(e.target.value)}
+          value={email}
+          required
         />
+      </label>
+      <label className="modal__label" htmlFor="password">
+        Password{" "}
         <input
+          id="password"
+          className="modal__input"
           type="password"
           placeholder="Password"
-          value={password}
           onChange={(e) => setPassword(e.target.value)}
+          value={password}
+          required
         />
-        <button type="submit">Login</button>
-      </form>
-      <button onClick={onClose}>Close</button>
-    </div>
-  ) : null;
+      </label>
+    </ModalWithForm>
+  );
 };
 
 export default LoginModal;

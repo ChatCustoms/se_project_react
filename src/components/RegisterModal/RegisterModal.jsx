@@ -1,3 +1,4 @@
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./RegisterModal.css";
 import { useState } from "react";
 
@@ -12,38 +13,64 @@ const RegisterModal = ({ isOpen, onClose, onRegister }) => {
     onRegister({ name, avatar, email, password });
   };
 
-  return isOpen ? (
-    <div className="modal">
-      <form onSubmit={handleSubmit}>
+  return (
+    <ModalWithForm
+      titleText="Sign Up"
+      buttonText="Register"
+      isOpen={isOpen}
+      onClose={onClose}
+      onSubmit={handleSubmit}
+    >
+      <label className="modal__label" htmlFor="name">
+        Name{" "}
         <input
+          id="name"
+          className="modal__input"
           type="text"
           placeholder="Name"
-          value={name}
           onChange={(e) => setName(e.target.value)}
+          value={name}
+          required
         />
+      </label>
+      <label className="modal__label" htmlFor="avatar">
+        Avatar URL{" "}
         <input
+          id="avatar"
+          className="modal__input"
           type="url"
           placeholder="Avatar URL"
-          value={avatar}
           onChange={(e) => setAvatar(e.target.value)}
+          value={avatar}
+          required
         />
+      </label>
+      <label className="modal__label" htmlFor="email">
+        Email{" "}
         <input
+          id="email"
+          className="modal__input" 
           type="email"
           placeholder="Email"
-          value={email}
           onChange={(e) => setEmail(e.target.value)}
+          value={email}
+          required
         />
+      </label>
+      <label className="modal__label" htmlFor="password">
+        Password{" "}
         <input
+          id="password"
+          className="modal__input"
           type="password"
           placeholder="Password"
-          value={password}
           onChange={(e) => setPassword(e.target.value)}
+          value={password}
+          required
         />
-        <button type="submit">Register</button>
-      </form>
-      <button onClick={onClose}>Close</button>
-    </div>
-  ) : null;
+      </label>
+    </ModalWithForm>     
+  )
 };
 
 export default RegisterModal;

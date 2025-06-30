@@ -1,5 +1,3 @@
-import { checkToken } from "./auth";
-
 const baseUrl = "http://localhost:3001";
 
 function getItems() {
@@ -12,7 +10,7 @@ function deleteItem(id) {
   }).then(checkResponse);
 }
 
-function addItem(item) {
+function addItem(item, token) {
   return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {
