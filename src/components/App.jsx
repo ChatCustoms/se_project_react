@@ -106,12 +106,18 @@ function App() {
   };
 
   const handleRegister = ({ name, avatar, email, password }) => {
+    const userData = {
+      name,
+      avatar,
+      email,
+      password,
+    };
     const loginData = {
       email,
       password,
     };
     auth
-      .register(data)
+      .register(userData)
       .then(() => handleLogin(loginData))
       .catch(console.error);
   };

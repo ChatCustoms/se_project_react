@@ -24,6 +24,7 @@ function Header({ handleAddClick, weatherData, isOpen, onLogin, onRegister }) {
         </p>
       </div>
       <ToggleSwitch />
+      { currentUser && (
       <button
         type="button"
         onClick={handleAddClick}
@@ -31,6 +32,7 @@ function Header({ handleAddClick, weatherData, isOpen, onLogin, onRegister }) {
       >
         + Add clothes
       </button>
+      )}
       {!currentUser ? (
         <div className="header__auth-buttons">
           <button type="button" className="header__login-btn" onClick={onLogin}>

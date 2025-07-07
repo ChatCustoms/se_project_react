@@ -1,4 +1,4 @@
-/* .weather-card {
+.weather-card {
   position: relative;
   display: flex;
   height: 80px;
@@ -20,39 +20,5 @@
   object-fit: cover;
   object-position: right top;
   width: 100%;
-} */
-
-.weather-card {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100px;
-  border-radius: 12px;
-  background-color: #00aaff; /* Add this */
-  padding: 0 20px;
-  margin: 20px auto;
-  color: #ffffff;
-  max-width: 600px;
-  overflow: hidden;
 }
 
-.weather-card__temp {
-  font-size: 36px;
-  line-height: 40px;
-  margin: 0;
-  color: #ffffff;
-  z-index: 2;
-}
-
-.weather-card__image {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  object-position: center;
-  position: absolute;
-  right: 20px;
-  bottom: 10px;
-  z-index: 1;
-  pointer-events: none;
-}

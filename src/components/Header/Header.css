@@ -27,6 +27,9 @@
   font-family: "cabinet Grotesk", sans-serif;
   font-weight: 700;
   font-size: 20px;
+  color: #000;
+  cursor: pointer;
+  background: none;
 }
 
 .header__user-container {
@@ -45,4 +48,25 @@
 .header__link {
   text-decoration: none;
   color: #000;
+}
+
+.header__login-btn {
+  background: none;
+  border: none;
+  font-family: "cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: #000;
+  cursor: pointer;
+}
+
+.header__register-btn {
+  background: none;
+  border: none;
+  font-family: "cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: #000;
+  cursor: pointer;
+  padding-left: 20px;
 }
