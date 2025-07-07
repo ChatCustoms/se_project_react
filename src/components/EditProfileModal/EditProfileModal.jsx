@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+import "./EditProfileModal.css";
 
 const EditProfileModal = ({ isOpen, onClose, onUpdateUser }) => {
   const currentUser = useContext(CurrentUserContext);
@@ -7,53 +8,53 @@ const EditProfileModal = ({ isOpen, onClose, onUpdateUser }) => {
   const [avatar, setAvatar] = useState("");
 
   useEffect(() => {
-    if (currentUser) {
-      setName(currentUser.name);
-      setAvatar(currentUser.avatar);
+    if (currentUser && isOpen) {
+      setName(currentUser.name || "");
+      setAvatar(currentUser.avatar || "");
     }
-  }, [currentUser]);
+  }, [currentUser, isOpen]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onUpdateUser({ name, avatar });
   };
 
-  return isOpen ? (
-    <div className="modal">
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          type="url"
-          value={avatar}
-          onChange={(e) => setAvatar(e.target.value)}
-        />
-        <button type="submit">Save</button>
-      </form>
-      <button onClick={onClose}>Close</button>
+  if (!isOpen) return null;
+
+  return (
+    <div className="edit-profile-modal__overlay">
+      <div className="edit-profile-modal__container">
+        <button className="edit-profile-modal__close" onClick={onClose}>
+          ×
+        </button>
+        <h2 className="edit-profile-modal__title">Change profile data</h2>
+        <form onSubmit={handleSubmit} className="edit-profile-modal__form">
+          <label className="edit-profile-modal__label">
+            Name*
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              className="edit-profile-modal__input"
+            />
+          </label>
+          <label className="edit-profile-modal__label">
+            Avatar
+            <input
+              type="url"
+              value={avatar}
+              onChange={(e) => setAvatar(e.target.value)}
+              className="edit-profile-modal__input"
+            />
+          </label>
+          <button type="submit" className="edit-profile-modal__save">
+            Save changes
+          </button>
+        </form>
+      </div>
     </div>
-  ) : null;
-};
-
-export const addCardLike = (id, token) => {
-  return fetch(`${BASE_URL}/items/${id}/likes`, {
-    method: "PUT",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  }).then((res) => (res.ok ? res.json() : Promise.reject("Like failed")));
-};
-
-export const removeCardLike = (id, token) => {
-  return fetch(`${BASE_URL}/items/${id}/likes`, {
-    method: "DELETE",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  }).then((res) => (res.ok ? res.json() : Promise.reject("Dislike failed")));
+  );
 };
 
 export default EditProfileModal;

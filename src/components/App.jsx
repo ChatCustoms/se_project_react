@@ -12,7 +12,7 @@ import { APIkey } from "../utils/constants";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "./AddItemModal/AddItemModal";
 import Profile from "./Profile/Profile";
-import { addItem, deleteItem, getItems } from "../utils/api";
+import { addItem, deleteItem, getItems, updateProfile } from "../utils/api";
 import ProtectedRoute from "./ProtectedRoute";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import auth from "../utils/auth";
@@ -20,6 +20,7 @@ import * as api from "../utils/api";
 import LoginModal from "./LoginModal/LoginModal";
 import RegisterModal from "./RegisterModal/RegisterModal";
 import { use } from "react";
+import EditProfileModal from "./EditProfileModal/EditProfileModal";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -187,6 +188,16 @@ function App() {
     setActiveModal("");
   };
 
+  const handleUpdateUser = (userData) => {
+    const token = localStorage.getItem("jwt");
+    updateProfile(userData, token)
+      .then((updatedUser) => {
+        setCurrentUser(updatedUser);
+        handleModalClose();
+      })
+      .catch(console.error);
+  };
+
   const openLoginModal = () => {
     setActiveModal("login");
   };
@@ -282,6 +293,9 @@ function App() {
                           clothingItems={clothingItems}
                           handleCardClick={handleCardClick}
                           handleAddClick={handleAddClick}
+                          handlEditProfileClick={() =>
+                            setActiveModal("edit-profile")
+                          }
                         />
                       }
                     />
@@ -299,6 +313,11 @@ function App() {
               card={selectedCard}
               onClose={handleModalClose}
               onDelete={handleDelete}
+            />
+            <EditProfileModal
+              isOpen={activeModal === "edit-profile"}
+              onClose={handleModalClose}
+              onUpdateUser={handleUpdateUser}
             />
             <Footer />
             <LoginModal

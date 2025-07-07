@@ -27,6 +27,24 @@ function addItem(item, token) {
   }).then(checkResponse);
 }
 
+export const addCardLike = (id, token) => {
+  return fetch(`${BASE_URL}/items/${id}/likes`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((res) => (res.ok ? res.json() : Promise.reject("Like failed")));
+};
+
+export const removeCardLike = (id, token) => {
+  return fetch(`${BASE_URL}/items/${id}/likes`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((res) => (res.ok ? res.json() : Promise.reject("Dislike failed")));
+};
+
 function checkResponse(response) {
   if (!response.ok) {
     return Promise.reject(`Error: ${response.status}`);

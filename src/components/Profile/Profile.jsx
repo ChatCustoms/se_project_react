@@ -3,11 +3,13 @@ import "./Profile.css";
 import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext.jsx";
 
+
 function Profile({
   clothingItems,
   handleCardClick,
   handleAddClick,
   onSignOut,
+  handlEditProfileClick
 }) {
   const currentUser = useContext(CurrentUserContext);
    return (
@@ -29,7 +31,7 @@ function Profile({
         </div>
 
         <div className="profile__actions">
-          <button className="profile__edit-button">Change profile data</button>
+          <button className="profile__edit-button" onClick={handlEditProfileClick}>Change profile data</button>
           <button className="profile__signout-button" onClick={onSignOut}>
             Log out
           </button>
