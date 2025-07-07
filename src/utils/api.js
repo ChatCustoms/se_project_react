@@ -1,12 +1,18 @@
 const baseUrl = "http://localhost:3001";
 
+let token = localStorage.getItem("token");
+
 function getItems() {
   return fetch(`${baseUrl}/items`).then(checkResponse);
 }
 
-function deleteItem(id) {
+function deleteItem(id, token) {
   return fetch(`${baseUrl}/items/${id}`, {
     method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
   }).then(checkResponse);
 }
 

@@ -1,0 +1,56 @@
+.confirm-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* ensure it's above everything */
+}
+
+.confirm-modal__content {
+  background-color: white;
+  border-radius: 12px;
+  padding: 30px;
+  width: 460px;
+  text-align: center;
+  font-family: "Cabinet Grotesk", sans-serif;
+  position: relative;
+}
+
+.confirm-modal__text {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.confirm-modal__confirm {
+  background: none;
+  border: none;
+  color: #ff4d00;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.confirm-modal__cancel {
+  background: none;
+  border: none;
+  color: black;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.confirm-modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}

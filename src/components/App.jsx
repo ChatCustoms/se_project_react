@@ -36,9 +36,9 @@ function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
   const [coordinates, setCoordinates] = useState({
-  latitude: null,
-  longitude: null,
-});
+    latitude: null,
+    longitude: null,
+  });
 
   const handleToggleSwitchChange = () => {
     if (currentTemperatureUnit === "F") {
@@ -62,7 +62,10 @@ function App() {
   };
 
   const handleDelete = () => {
-    deleteItem(selectedCard._id)
+    const token = localStorage.getItem("jwt");
+    console.log("Token being sent to deleteItem:", token);
+    api
+      .deleteItem(selectedCard._id, token)
       .then(() => {
         setClothingItems(
           clothingItems.filter((item) => item._id !== selectedCard._id)
@@ -192,8 +195,6 @@ function App() {
     setActiveModal("register");
   };
 
-
-
   useEffect(() => {
     const token = localStorage.getItem("jwt");
     if (token) {
@@ -210,16 +211,16 @@ function App() {
   }, []);
 
   useEffect(() => {
-  navigator.geolocation.getCurrentPosition(
-    (position) => {
-      setCoordinates({
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-      });
-    },
-    (err) => console.log("Geo error:", err)
-  );
-}, []);
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setCoordinates({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+      },
+      (err) => console.log("Geo error:", err)
+    );
+  }, []);
 
   useEffect(() => {
     if (!coordinates?.latitude || !coordinates?.longitude) return;
