@@ -44,7 +44,7 @@ export const addCardLike = (id, token) => {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  }).then((res) => res.ok ? res.json() : Promise.reject("Like failed"));
+  }).then((res) => (res.ok ? res.json() : Promise.reject("Like failed")));
 };
 
 export const removeCardLike = (id, token) => {
@@ -53,7 +53,7 @@ export const removeCardLike = (id, token) => {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  }).then((res) => res.ok ? res.json() : Promise.reject("Dislike failed"));
+  }).then((res) => (res.ok ? res.json() : Promise.reject("Dislike failed")));
 };
 
 export default EditProfileModal;

@@ -49,7 +49,7 @@ const RegisterModal = ({ isOpen, onClose, onRegister }) => {
         Email{" "}
         <input
           id="email"
-          className="modal__input" 
+          className="modal__input"
           type="email"
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
@@ -69,8 +69,8 @@ const RegisterModal = ({ isOpen, onClose, onRegister }) => {
           required
         />
       </label>
-    </ModalWithForm>     
-  )
+    </ModalWithForm>
+  );
 };
 
 export default RegisterModal;

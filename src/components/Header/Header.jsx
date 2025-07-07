@@ -1,5 +1,4 @@
 import "./Header.css";
-import avatar from "../../images/Avatar.png";
 import logo from "../../images/logo.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch.jsx";
 import { Link } from "react-router-dom";

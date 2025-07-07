@@ -8,7 +8,7 @@ import ModalWithForm from "./ModalWithForm/ModalWithForm";
 import ItemModal from "./ItemModal/ItemModal";
 import Footer from "./Footer/Footer";
 import { filterWeatherData, getWeather } from "../utils/weatherApi";
-import { coordinates, APIkey } from "../utils/constants";
+import { APIkey } from "../utils/constants";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "./AddItemModal/AddItemModal";
 import Profile from "./Profile/Profile";
@@ -19,6 +19,7 @@ import auth from "../utils/auth";
 import * as api from "../utils/api";
 import LoginModal from "./LoginModal/LoginModal";
 import RegisterModal from "./RegisterModal/RegisterModal";
+import { use } from "react";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -34,6 +35,10 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
+  const [coordinates, setCoordinates] = useState({
+  latitude: null,
+  longitude: null,
+});
 
   const handleToggleSwitchChange = () => {
     if (currentTemperatureUnit === "F") {
@@ -181,6 +186,8 @@ function App() {
     setActiveModal("register");
   };
 
+
+
   useEffect(() => {
     const token = localStorage.getItem("jwt");
     if (token) {
@@ -197,15 +204,30 @@ function App() {
   }, []);
 
   useEffect(() => {
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      setCoordinates({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+      });
+    },
+    (err) => console.log("Geo error:", err)
+  );
+}, []);
+
+  useEffect(() => {
+    if (!coordinates?.latitude || !coordinates?.longitude) return;
+
     getWeather(coordinates, APIkey)
       .then((data) => {
         const filterData = filterWeatherData(data);
+        console.log("Weather data:", filterData);
         setWeatherData(filterData);
       })
       .catch((err) => {
-        console.log(err);
+        console.log("Weather fetch failed:", err);
       });
-  }, []);
+  }, [coordinates]);
 
   useEffect(() => {
     getItems()
@@ -218,7 +240,7 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <BrowserRouter>
+      <BrowserRouter basename="/se_project_react">
         <CurrentTemperatureUnitContext.Provider
           value={{ currentTemperatureUnit, handleToggleSwitchChange }}
         >
