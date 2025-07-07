@@ -1,50 +1,62 @@
+.modal__content_type_image {
+  background-color: white;
+  border-radius: 20px;
+  max-width: 498px;
+  width: 100%;
+  position: relative;
+  font-family: "Cabinet Grotesk", sans-serif;
+  overflow: hidden;
+  padding: 0;
+}
+
+.item-modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+}
+
 .modal__image {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
   border-radius: 20px 20px 0 0;
-  margin: 0;
 }
 
-.modal__content_type_image {
-  padding: 0;
-  max-width: 75vw;
-  max-height: 75vh;
-  width: auto;
-  height: auto;
-}
-
-.modal__footer {
-  padding: 20px;
-  background-color: white;
+.item-modal__footer {
+  background-color: #fff;
+  padding: 16px 20px;
   border-radius: 0 0 20px 20px;
-  gap: 12px;
+}
+
+.item-modal__info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
 }
 
 .modal__caption {
-  margin: 0 0 12px 12px;
   font-size: 20px;
   font-weight: 700;
-  font-family: "cabinet Grotesk", sans-serif;
-  left: 32px;
-  bottom: 68px;
+  margin: 0;
 }
 
 .modal__weather {
-  margin: 0 0 12px 12px;
-  font-size: 20px;
-  font-family: "cabinet Grotesk", sans-serif;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin: 0;
 }
 
 .modal__delete {
-  position: absolute;
-  right: 32px;
-  top: 518px;
   color: #ff4d00;
-  font-size: 20px;
-  font-family: "cabinet Grotesk", sans-serif;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 600;
+  background: none;
   border: none;
-  background-color: transparent;
+  cursor: pointer;
 }

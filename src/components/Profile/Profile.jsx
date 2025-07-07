@@ -10,33 +10,39 @@ function Profile({
   onSignOut,
 }) {
   const currentUser = useContext(CurrentUserContext);
-  return (
+   return (
     <div className="profile">
       <section className="profile__sidebar">
-        <p className="header__username">{currentUser.name}</p>
+        <div className="profile__user_info">
         {currentUser.avatar ? (
           <img
             src={currentUser.avatar}
             alt={currentUser.name}
-            className="header__avatar"
+            className="profile__avatar"
           />
         ) : (
-          <div className="header__avatar-placeholder">
+          <div className="profile__avatar-placeholder">
             {currentUser.name.charAt(0)}
           </div>
         )}
+        <p className="profile__name">{currentUser.name}</p>
+        </div>
+
+        <div className="profile__actions">
+          <button className="profile__edit-button">Change profile data</button>
+          <button className="profile__signout-button" onClick={onSignOut}>
+            Log out
+          </button>
+        </div>
       </section>
-      <section className="profile__clothing-items">
+
+      <section className="profile__main">
         <ClothesSection
           clothingItems={clothingItems}
           handleCardClick={handleCardClick}
           handleAddClick={handleAddClick}
         />
       </section>
-      <button className="change__profile_button">Change profile data</button>
-      <button className="profile__signout-button" onClick={onSignOut}>
-        Log out
-      </button>
     </div>
   );
 }
