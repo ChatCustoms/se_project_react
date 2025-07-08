@@ -18,9 +18,9 @@ function ItemModal({ activeModal, onClose, card, onDelete }) {
   };
 
   const handleConfirmDelete = () => {
-    onDelete(card); // call the parent delete handler
-    setShowConfirm(false); // close confirm modal
-    onClose(); // also close the main modal
+    onDelete(card);
+    setShowConfirm(false);
+    onClose();
   };
 
   const handleCancel = () => {

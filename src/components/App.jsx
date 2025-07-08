@@ -180,9 +180,10 @@ function App() {
 
     request(_id, token)
       .then((updatedCard) => {
-        setClothingItems((cards) => [
-          ...cards.map((item) => (item._id === _id ? updatedCard : item)),
-        ]);
+        setClothingItems((cards) => 
+          cards.map((item) => (item._id === _id ? updatedCard : item)),
+        );
+        console.log("Card updated successfully:", updatedCard);
       })
       .catch(console.error);
   };
@@ -285,7 +286,6 @@ function App() {
                       handleCardClick={handleCardClick}
                       clothingItems={clothingItems}
                       handleCardLike={handleCardLike}
-                      handleAddClick={handleAddClick}
                     />
                   }
                 />
