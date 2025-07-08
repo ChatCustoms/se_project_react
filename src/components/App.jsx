@@ -168,15 +168,21 @@ function App() {
 
   const handleCardLike = ({ _id, likes }) => {
     const token = localStorage.getItem("jwt");
+
+    if (!currentUser || !currentUser._id || !token) {
+      console.error("User not logged in or token missing");
+      return;
+    }
+
     const isLiked = likes.includes(currentUser._id);
 
     const request = isLiked ? api.removeCardLike : api.addCardLike;
 
     request(_id, token)
       .then((updatedCard) => {
-        setClothingItems((cards) =>
-          cards.map((item) => (item._id === _id ? updatedCard : item))
-        );
+        setClothingItems((cards) => [
+          ...cards.map((item) => (item._id === _id ? updatedCard : item)),
+        ]);
       })
       .catch(console.error);
   };
@@ -278,6 +284,8 @@ function App() {
                       weatherData={weatherData}
                       handleCardClick={handleCardClick}
                       clothingItems={clothingItems}
+                      handleCardLike={handleCardLike}
+                      handleAddClick={handleAddClick}
                     />
                   }
                 />

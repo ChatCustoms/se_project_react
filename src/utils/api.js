@@ -28,21 +28,21 @@ function addItem(item, token) {
 }
 
 export const addCardLike = (id, token) => {
-  return fetch(`${BASE_URL}/items/${id}/likes`, {
+  return fetch(`${baseUrl}/items/${id}/likes`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  }).then((res) => (res.ok ? res.json() : Promise.reject("Like failed")));
+  }).then(checkResponse);
 };
 
 export const removeCardLike = (id, token) => {
-  return fetch(`${BASE_URL}/items/${id}/likes`, {
+  return fetch(`${baseUrl}/items/${id}/likes`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  }).then((res) => (res.ok ? res.json() : Promise.reject("Dislike failed")));
+  }).then(checkResponse);
 };
 
 function checkResponse(response) {

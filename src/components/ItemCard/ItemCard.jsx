@@ -15,29 +15,26 @@ function ItemCard({ item, onCardClick, onCardLike }) {
     onCardClick(item);
   };
 
-  const handleLike = () => {
+  const handleLike = (e) => {
+    e.stopPropagation();
+    console.log("Like button clicked");
     onCardLike(item);
   };
 
   return (
     <li className="card__item">
       <div className="card" onClick={handleCardClick}>
-      <div className="card__header">
-        <p className="card__name">{item.name}</p>
-        <button
-          className={itemLikeButtonClassName}
-          type="button"
-          onClick={handleLike}
-        >
-          <img src={likeIcon} alt="Like" className="card__like-icon" />
-        </button>
-      </div>
-      <img
-        src={item.imageUrl}
-        alt={item.name}
-        className="card__image"
-        onClick={handleCardClick}
-      />
+        <div className="card__header">
+          <p className="card__name">{item.name}</p>
+          <button
+            className={itemLikeButtonClassName}
+            type="button"
+            onClick={handleLike}
+          >
+            <img src={likeIcon} alt="Like" className="card__like-icon" />
+          </button>
+        </div>
+        <img src={item.imageUrl} alt={item.name} className="card__image" />
       </div>
     </li>
   );
