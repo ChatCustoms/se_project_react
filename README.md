@@ -8,4 +8,6 @@ The idea of the application is pretty simple - we make a call to an API, which t
 
 The page can be found at: https://ChatCustoms.github.io/se_project_react 
 
+The backend repo for this project can be found at: https://github.com/ChatCustoms/se_project_express
+
 - [Figma Design](https://www.figma.com/file/DTojSwldenF9UPKQZd6RRb/Sprint-10%3A-WTWR)
