@@ -8,6 +8,7 @@ function ModalWithForm({
   isOpen,
   onClose,
   onSubmit,
+  hideDefaultButton = false,
 }) {
   return (
     <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
@@ -18,9 +19,11 @@ function ModalWithForm({
         </button>
         <form className="modal__form" onSubmit={onSubmit}>
           {children}
-          <button className="modal__submit" type="submit">
-            {buttonText}
-          </button>
+          {!hideDefaultButton && (
+            <button className="modal__submit" type="submit">
+              {buttonText}
+            </button>
+          )}
         </form>
       </div>
     </div>

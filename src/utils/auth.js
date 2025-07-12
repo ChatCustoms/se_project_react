@@ -17,7 +17,9 @@ const login = ({ email, password }) => {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
-  }).then((res) => (res.ok ? res.json() : Promise.reject("Login failed")));
+  }).then((res) => {
+    checkResponse(res);
+  });
 };
 
 const checkToken = (token) => {
@@ -26,7 +28,9 @@ const checkToken = (token) => {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  }).then((res) => (res.ok ? res.json() : Promise.reject("Invalid token")));
+  }).then((res) => {
+    checkResponse(res);
+  });
 };
 
 export default {

@@ -17,6 +17,7 @@ const LoginModal = ({ isOpen, onClose, onLogin, onRegister }) => {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      hideDefaultButton={true}Ï
     >
       <label className="modal__label">
         Email

@@ -13,35 +13,31 @@
   border-radius: 4px;
 }
 
-.modal__form button[type="submit"] {
-  background-color: #347eff;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.modal__button-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
   margin-top: 10px;
 }
 
-.modal__form button[type="button"] {
+.modal__submit {
+  background-color: #347eff;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: "Cabinet Grotesk", sans-serif;
+}
+
+.modal__register {
   background: none;
   border: none;
   color: #888;
   cursor: pointer;
-  margin-top: 5px;
-}
-
-.modal__button-row {
-  display: flex;
-  align-items: center;
-}
-
-.modal__register {
-  display: flex;
-  justify-content: center;
-  margin-left: 12px;
   font-size: 16px;
-  font-weight: 700;
-  font-style: bold;
+  font-weight: 600;
   font-family: "Cabinet Grotesk", sans-serif;
 }

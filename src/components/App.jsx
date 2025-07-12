@@ -341,6 +341,7 @@ function App() {
               onOpen={openRegisterModal}
               onClose={handleModalClose}
               onRegister={handleRegister}
+              onLogin={openLoginModal}
             />
           </div>
         </CurrentTemperatureUnitContext.Provider>

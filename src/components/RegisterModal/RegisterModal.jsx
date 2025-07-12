@@ -2,7 +2,7 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./RegisterModal.css";
 import { useState } from "react";
 
-const RegisterModal = ({ isOpen, onClose, onRegister }) => {
+const RegisterModal = ({ isOpen, onClose, onRegister, onLogin }) => {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
   const [email, setEmail] = useState("");
@@ -16,12 +16,12 @@ const RegisterModal = ({ isOpen, onClose, onRegister }) => {
   return (
     <ModalWithForm
       titleText="Sign Up"
-      buttonText="Register"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      hideDefaultButton={true}
     >
-      <label className="modal__label" htmlFor="name">
+      <label className="modal__label">
         Name{" "}
         <input
           id="register-name"
@@ -33,7 +33,7 @@ const RegisterModal = ({ isOpen, onClose, onRegister }) => {
           required
         />
       </label>
-      <label className="modal__label" htmlFor="avatar">
+      <label className="modal__label">
         Avatar URL{" "}
         <input
           id="avatar"
@@ -45,7 +45,7 @@ const RegisterModal = ({ isOpen, onClose, onRegister }) => {
           required
         />
       </label>
-      <label className="modal__label" htmlFor="email">
+      <label className="modal__label">
         Email{" "}
         <input
           id="email"
@@ -57,7 +57,7 @@ const RegisterModal = ({ isOpen, onClose, onRegister }) => {
           required
         />
       </label>
-      <label className="modal__label" htmlFor="password">
+      <label className="modal__label">
         Password{" "}
         <input
           id="password"
@@ -69,6 +69,15 @@ const RegisterModal = ({ isOpen, onClose, onRegister }) => {
           required
         />
       </label>
+
+      <div className="modal__button-row">
+        <button type="submit" className="modal__submit">
+          Register
+        </button>
+        <button type="button" className="modal__register" onClick={onLogin}>
+          or Log In
+        </button>
+      </div>
     </ModalWithForm>
   );
 };

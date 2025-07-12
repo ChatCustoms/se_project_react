@@ -6,8 +6,9 @@ import Liked_button from "../../images/liked-button.svg";
 
 function ItemCard({ item, onCardClick, onCardLike }) {
   const currentUser = useContext(CurrentUserContext);
+  const isLoggedIn = Boolean(currentUser?._id);
 
-  const isLiked = item.likes.includes(currentUser?._id);
+  const isLiked = isLoggedIn && item.likes.includes(currentUser?._id);
   const itemLikeButtonClassName = `card__like-button ${
     isLiked ? "card__like-button_liked" : ""
   }`;
@@ -18,6 +19,7 @@ function ItemCard({ item, onCardClick, onCardLike }) {
 
   const handleLike = (e) => {
     e.stopPropagation();
+    if (!isLoggedIn) return;
     console.log("Like button clicked");
     onCardLike(item);
   };
@@ -31,6 +33,7 @@ function ItemCard({ item, onCardClick, onCardLike }) {
             className={itemLikeButtonClassName}
             type="button"
             onClick={handleLike}
+            disabled={!isLoggedIn}
           >
             <img
               src={isLiked ? Liked_button : likeIcon}

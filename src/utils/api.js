@@ -60,9 +60,9 @@ const updateProfile = (data, token) => {
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(data),
-  }).then((res) =>
-    res.ok ? res.json() : Promise.reject("Profile update failed")
-  );
+  }).then((res) => {
+    checkResponse(res);
+  });
 };
 
 export { getItems, deleteItem, addItem, checkResponse, updateProfile };

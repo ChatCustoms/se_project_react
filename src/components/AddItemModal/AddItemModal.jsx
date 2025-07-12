@@ -46,7 +46,7 @@ export default function AddItemModal({
       onClose={onClose}
       onSubmit={handleSubmit}
     >
-      <label className="modal__label" htmlFor="name">
+      <label className="modal__label">
         Name{" "}
         <input
           id="name"
@@ -58,7 +58,7 @@ export default function AddItemModal({
           required
         />
       </label>
-      <label className="modal__label" htmlFor="imageUrl">
+      <label className="modal__label">
         Image{" "}
         <input
           id="imageUrl"
