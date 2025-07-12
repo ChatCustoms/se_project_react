@@ -14,13 +14,17 @@
 }
 
 .modal__form button[type="submit"] {
-  background-color: #00a86b;
+  background-color: rgba(0, 0, 0, 0.3);
   color: white;
   padding: 10px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   margin-top: 10px;
+}
+
+.modal__form button[type="submit"]:hover {
+  background-color: rgba(0, 0, 0, 1);
 }
 
 .modal__form button[type="button"] {

@@ -24,7 +24,7 @@ const RegisterModal = ({ isOpen, onClose, onRegister }) => {
       <label className="modal__label" htmlFor="name">
         Name{" "}
         <input
-          id="name"
+          id="register-name"
           className="modal__input"
           type="text"
           placeholder="Name"

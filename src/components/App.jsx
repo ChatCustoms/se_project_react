@@ -180,8 +180,8 @@ function App() {
 
     request(_id, token)
       .then((updatedCard) => {
-        setClothingItems((cards) => 
-          cards.map((item) => (item._id === _id ? updatedCard : item)),
+        setClothingItems((cards) =>
+          cards.map((item) => (item._id === _id ? updatedCard : item))
         );
         console.log("Card updated successfully:", updatedCard);
       })
@@ -192,7 +192,7 @@ function App() {
     localStorage.removeItem("jwt");
     setCurrentUser(null);
     setLoggedIn(false);
-    setActiveModal("");
+    handleModalClose();
   };
 
   const handleUpdateUser = (userData) => {
@@ -223,7 +223,7 @@ function App() {
           setLoggedIn(true);
         })
         .catch((err) => {
-          console.error;
+          console.error(err);
         });
     }
   }, []);
@@ -304,6 +304,7 @@ function App() {
                           handlEditProfileClick={() =>
                             setActiveModal("edit-profile")
                           }
+                          handleCardLike={handleCardLike}
                         />
                       }
                     />
@@ -333,6 +334,7 @@ function App() {
               onOpen={openLoginModal}
               onClose={handleModalClose}
               onLogin={handleLogin}
+              onRegister={openRegisterModal}
             />
             <RegisterModal
               isOpen={activeModal === "register"}

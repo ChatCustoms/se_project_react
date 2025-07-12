@@ -2,6 +2,7 @@ import "./ItemCard.css";
 import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import likeIcon from "../../images/Like-button.png";
+import Liked_button from "../../images/liked-button.svg";
 
 function ItemCard({ item, onCardClick, onCardLike }) {
   const currentUser = useContext(CurrentUserContext);
@@ -31,7 +32,11 @@ function ItemCard({ item, onCardClick, onCardLike }) {
             type="button"
             onClick={handleLike}
           >
-            <img src={likeIcon} alt="Like" className="card__like-icon" />
+            <img
+              src={isLiked ? Liked_button : likeIcon}
+              alt="Like"
+              className="card__like-icon"
+            />
           </button>
         </div>
         <img src={item.imageUrl} alt={item.name} className="card__image" />
