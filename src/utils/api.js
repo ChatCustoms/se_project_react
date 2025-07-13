@@ -61,7 +61,7 @@ const updateProfile = (data, token) => {
     },
     body: JSON.stringify(data),
   }).then((res) => {
-    checkResponse(res);
+    return checkResponse(res);
   });
 };
 

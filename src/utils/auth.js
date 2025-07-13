@@ -8,7 +8,7 @@ const register = ({ name, avatar, email, password }) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, avatar, email, password }),
   }).then((res) => {
-    checkResponse(res);
+    return checkResponse(res);
   });
 };
 
@@ -18,7 +18,7 @@ const login = ({ email, password }) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
   }).then((res) => {
-    checkResponse(res);
+    return checkResponse(res);
   });
 };
 
@@ -29,7 +29,7 @@ const checkToken = (token) => {
       Authorization: `Bearer ${token}`,
     },
   }).then((res) => {
-    checkResponse(res);
+    return checkResponse(res);
   });
 };
 
