@@ -1,4 +1,8 @@
-const BASE_URL = "http://localhost:3001";
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://api.wtwr.random-domain.org"
+    : "http://localhost:3001";
+
 import { checkResponse } from "./api";
 
 const register = ({ name, avatar, email, password }) => {

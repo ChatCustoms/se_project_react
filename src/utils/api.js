@@ -1,4 +1,7 @@
-const baseUrl = "http://localhost:3001";
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://api.wtwr.random-domain.org"
+    : "http://localhost:3001";
 
 let token = localStorage.getItem("token");
 
