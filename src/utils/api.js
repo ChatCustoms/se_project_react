@@ -3,10 +3,13 @@ const baseUrl =
     ? "https://api.wtwr.random-domain.org"
     : "http://localhost:3001";
 
-let token = localStorage.getItem("token");
-
-function getItems() {
-  return fetch(`${baseUrl}/items`).then(checkResponse);
+function getItems(token) {
+  return fetch(`${baseUrl}/items`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  }).then(checkResponse);
 }
 
 function deleteItem(id, token) {
